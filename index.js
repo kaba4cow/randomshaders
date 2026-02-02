@@ -12,6 +12,8 @@ out vec4 fragColor;
 void main() {
     float x = 2.0 * gl_FragCoord.x / resolution.x - 1.0;
     float y = 2.0 * gl_FragCoord.y / resolution.y - 1.0;
+    float r = length(vec2(x, y));
+    float a = atan(y, x);
     fragColor.r = $;
     fragColor.g = $;
     fragColor.b = $;
@@ -21,6 +23,8 @@ void main() {
 const PARAMETERS = Object.freeze([
     'x',
     'y',
+    'r',
+    'a',
     't'
 ]);
 
