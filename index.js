@@ -59,7 +59,6 @@ const EXPRESSIONS = Object.freeze([
     'normalize(vec2($, $)).x',
     'normalize(vec3($, $, $)).x',
     'clamp($, 0.0, 1.0)',
-    'fract($)',
     'mix($, $, $)',
     'smoothstep(0.0, 1.0, clamp($, 0.0, 1.0))',
 ]);
