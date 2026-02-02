@@ -28,8 +28,15 @@ const PARAMETERS = Object.freeze([
     't'
 ]);
 
+let rngState;
+
+function random() {
+    rngState = Math.imul(rngState, 48271) | 0;
+    return (rngState & 0x7fffffff) / 0x7fffffff;
+}
+
 function getRandomParameter() {
-    const index = Math.floor(Math.random() * PARAMETERS.length);
+    const index = Math.floor(random() * PARAMETERS.length);
 
     return PARAMETERS[index];
 }
@@ -64,7 +71,7 @@ const EXPRESSIONS = Object.freeze([
 ]);
 
 function getRandomExpression() {
-    const index = Math.floor(Math.random() * EXPRESSIONS.length);
+    const index = Math.floor(random() * EXPRESSIONS.length);
 
     return EXPRESSIONS[index];
 }
@@ -157,7 +164,16 @@ function render() {
     requestAnimationFrame(render);
 }
 
+function setSeed(seed) {
+    rngState = seed;
+    document.getElementById("seed-display").textContent = seed;
+    const url = new URL(window.location);
+    url.searchParams.set("seed", seed);
+    history.replaceState(null, "", url);
+}
+
 function reset() {
+    setSeed(Math.floor(Math.random() * 0x7fffffff));
     startTime = performance.now();
     initShader();
 }
@@ -180,5 +196,12 @@ function generateDataSource(depth) {
 
 document.getElementById("reset-button").addEventListener("click", reset);
 
-reset();
+const urlSeed = new URLSearchParams(window.location.search).get("seed");
+if (urlSeed !== null) {
+    setSeed(parseInt(urlSeed, 10));
+    startTime = performance.now();
+    initShader();
+} else {
+    reset();
+}
 render();

@@ -33,6 +33,11 @@ body {
     }
 }
 
+#seed-display {
+    color: #888;
+    font-size: 14px;
+}
+
 #canvas {
     border: 1px solid #555;
 }
