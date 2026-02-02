@@ -15,10 +15,12 @@ body {
 }
 
 #controls {
-    margin-top: 12px;
+    display: flex;
+    flex-direction: column;
 }
 
 #reset-button {
+    margin-top: 1rem;
     padding: 8px 24px;
     font-family: monospace;
     font-size: 14px;
@@ -34,6 +36,8 @@ body {
 }
 
 #seed-display {
+    margin-top: 1rem;
+    align-self: center;
     color: #888;
     font-size: 14px;
 }
